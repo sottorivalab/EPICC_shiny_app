@@ -62,8 +62,6 @@ plot_atac_track = function(click_data, width=1000, n_win=50) {
     
     # merge data in groups
     .load_data = function(x) {
-      #d = rtracklayer::import(x, format = "bed", which=gr_peak, genome="hg38")
-      #d = bedtorch::read_bed(x, range=as.character(gr_peak), use_gr=TRUE)
       d = readRDS(x)
       if (is.null(d)) d = GRanges()
       n = countOverlaps(wins, d)
@@ -137,9 +135,6 @@ plot_atac_track = function(click_data, width=1000, n_win=50) {
 
 plot_sample_stats = function(click_data) {
   
-  # fix peak id
-  click_data$peak = with(recurrence_summary, peak[id == click_data$peak])
-  
   if (is.null(click_data)) {
     
     plot = 
@@ -153,6 +148,9 @@ plot_sample_stats = function(click_data) {
       cowplot::theme_cowplot()
     
   } else {
+    
+    # fix peak id
+    click_data$peak = with(recurrence_summary, peak[id == click_data$peak])
     
     pl1 = insertion_data_annot %>% 
       dplyr::filter(patient == click_data$case) %>% 
