@@ -8,7 +8,7 @@ extend_by = 10000
 out_dir = "data/bed_files"
 
 min_q_value_peaks = 0.001
-min_enrichment_peaks = 4.0
+min_enrichment_peaks = 0
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 # datasets ####
@@ -128,7 +128,7 @@ mt[names(input_peaks) == "pan_patient.E"] = which(group_annot$group == "Normals"
 names(input_peaks) = group_annot$group[mt]
 input_peaks = input_peaks[!is.na(mt)]
 
-saveRDS(input_peaks, "data/other/input_peaks.rds")
+saveRDS(input_peaks, "data/other/peaks.rds")
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
